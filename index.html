@@ -1,140 +1,315 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KHO GAME TIN HỌC</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KHO GAME TIN HỌC - CÔ NGUYÊN</title>
+    <!-- Thêm font chữ dễ thương từ Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #7BC67B;
+            --secondary-color: #FFD166;
+            --bg-gradient: linear-gradient(135deg, #E0F2F1 0%, #F1F8E9 100%);
+            --text-color: #455A64;
+            --card-bg: rgba(255, 255, 255, 0.9);
+        }
 
-<style>
-* {
-    box-sizing: border-box;
-}
+        * { 
+            box-sizing: border-box; 
+            margin: 0;
+            padding: 0;
+        }
 
-body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: white;
-}
+        body {
+            font-family: 'Comfortaa', cursive;
+            background: var(--bg-gradient);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            opacity: 0;
+            animation: fadeInPage 0.8s ease-out forwards;
+        }
 
-/* HEADER */
-.header {
-    padding: 30px 15px 10px;
-    text-align: center;
-}
+        @keyframes fadeInPage {
+            to { opacity: 1; }
+        }
 
-.header h1 {
-    margin: 0;
-    font-size: 26px;
-}
+        /* Hiệu ứng hoa rơi */
+        #flower-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
 
-.header p {
-    margin-top: 8px;
-    font-size: 14px;
-    opacity: 0.9;
-}
+        .flower {
+            position: absolute;
+            background-color: #fff;
+            border-radius: 50% 0 50% 50%;
+            opacity: 0.6;
+            animation: fall linear infinite;
+        }
 
-/* GRID RESPONSIVE */
-.grid {
-    display: grid;
-    gap: 15px;
-    padding: 15px;
-}
+        @keyframes fall {
+            0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 0.8; }
+            100% { transform: translateY(110vh) translateX(100px) rotate(360deg); opacity: 0; }
+        }
 
-/* MOBILE: 1 cột */
-.grid {
-    grid-template-columns: 1fr;
-}
+        /* Layout */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            width: 100%;
+        }
 
-/* TABLET */
-@media (min-width: 600px) {
-    .grid {
-        grid-template-columns: 1fr 1fr;
-    }
-}
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
 
-/* LAPTOP */
-@media (min-width: 1024px) {
-    .grid {
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-    }
-}
+        .header h1 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            color: #2E7D32;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+            margin-bottom: 15px;
+        }
 
-/* CARD */
-.card {
-    background: white;
-    color: #333;
-    border-radius: 20px;
-    padding: 25px 15px;
-    text-align: center;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 18px;
-    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
-    transition: 0.3s;
-}
+        .header p {
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
+            background: #A5D6A7;
+            display: inline-block;
+            padding: 5px 20px;
+            border-radius: 20px;
+            color: white;
+        }
 
-/* Hover (PC) */
-.card:hover {
-    transform: translateY(-5px);
-}
+        /* Music Toggle */
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            background: white;
+            padding: 10px;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            cursor: pointer;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: 0.3s;
+        }
 
-/* Click (mobile giống app) */
-.card:active {
-    transform: scale(0.95);
-}
+        .music-control:hover { transform: scale(1.1); }
 
-/* ICON */
-.icon {
-    font-size: 40px;
-    margin-bottom: 10px;
-}
+        /* Grid System */
+        .grid {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        }
 
-/* FOOTER */
-.footer {
-    text-align: center;
-    font-size: 12px;
-    opacity: 0.8;
-    padding: 15px;
-}
-</style>
+        /* Card Style */
+        .card {
+            background: var(--card-bg);
+            border: 3px solid transparent;
+            border-radius: 30px;
+            padding: 40px 20px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.5));
+            pointer-events: none;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: #C8E6C9;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            background: white;
+        }
+
+        /* Icon Animation */
+        .icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            transition: 0.5s;
+            filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1));
+        }
+
+        .card:hover .icon {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .card span {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #388E3C;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: auto;
+            text-align: center;
+            padding: 30px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Page Transition */
+        .fade-out {
+            animation: fadeOut 0.5s forwards;
+        }
+
+        @keyframes fadeOut {
+            to { opacity: 0; transform: scale(0.95); }
+        }
+
+        /* Màu sắc riêng cho từng khối */
+        .card-6 { background-color: #E3F2FD; }
+        .card-7 { background-color: #F1F8E9; }
+        .card-8 { background-color: #FFFDE7; }
+        .card-9 { background-color: #F3E5F5; }
+
+    </style>
 </head>
-
 <body>
 
-<div class="header">
-    <h1>🎮 Kho Game Tin Học</h1>
-    <p>Các em chọn khối để bắt đầu!</p>
-	<p>Chúc các em có những giờ ôn luyện thật vui vẻ!</p>
-</div>
+    <!-- Container cho hoa rơi -->
+    <div id="flower-container"></div>
 
-<div class="grid">
+    <!-- Nhạc nền (Sử dụng link nhạc không bản quyền lofi chill) -->
+    <audio id="bg-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
 
-    <a class="card" href="khoi6/index.html">
-        <div class="icon">📘</div>
-        Khối 6
-    </a>
+    <div class="music-control" id="music-btn" title="Bật/Tắt nhạc">
+        🎵
+    </div>
 
-    <a class="card" href="khoi7/index.html">
-        <div class="icon">📗</div>
-        Khối 7
-    </a>
+    <div class="container">
+        <header class="header">
+            <h1>🌿 Kho Game Tin Học</h1>
+            <p>Học vui – Chơi vui – Thông minh hơn mỗi ngày!</p>
+        </header>
 
-    <a class="card" href="khoi8/index.html">
-        <div class="icon">📙</div>
-        Khối 8
-    </a>
+        <main class="grid">
+            <a class="card card-6" href="https://hainguyen03299-beep.github.io/Khoi6-TinHoc/indexKhoi6.html">
+                <div class="icon">🦋</div>
+                <span>Khối 6</span>
+            </a>
 
-    <a class="card" href="khoi9/index.html">
-        <div class="icon">📕</div>
-        Khối 9
-    </a>
+            <a class="card card-7" href="https://hainguyen03299-beep.github.io/Khoi7-TinHoc/indexKhoi7.html">
+                <div class="icon">🍃</div>
+                <span>Khối 7</span>
+            </a>
 
-</div>
+            <a class="card card-8" href="https://hainguyen03299-beep.github.io/Khoi8-TinHoc/indexKhoi8.html">
+                <div class="icon">🌼</div>
+                <span>Khối 8</span>
+            </a>
 
-<div class="footer">
-    Thiết kế bởi Cô Nguyên - THCS Tam Giang
-</div>
+            <a class="card card-9" href="https://hainguyen03299-beep.github.io/Khoi9-TinHoc/indexKhoi9.html">
+                <div class="icon">🍭</div>
+                <span>Khối 9</span>
+            </a>
+        </main>
 
+        <footer class="footer">
+            🌱 Thiết kế bởi Cô Nguyên - THCS Tam Giang
+        </footer>
+    </div>
+
+    <script>
+        // Tạo hiệu ứng hoa rơi
+        const container = document.getElementById('flower-container');
+        const flowerCount = 15;
+        const colors = ['#FFECB3', '#C8E6C9', '#E1F5FE', '#F3E5F5', '#FFFFFF'];
+
+        function createFlower() {
+            const flower = document.createElement('div');
+            flower.className = 'flower';
+            
+            // Random size và vị trí
+            const size = Math.random() * 15 + 10 + 'px';
+            flower.style.width = size;
+            flower.style.height = size;
+            flower.style.left = Math.random() * 100 + 'vw';
+            flower.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            
+            // Random thời gian rơi
+            const duration = Math.random() * 5 + 5 + 's';
+            flower.style.animationDuration = duration;
+            
+            container.appendChild(flower);
+
+            // Xóa hoa sau khi rơi xong
+            setTimeout(() => {
+                flower.remove();
+            }, parseFloat(duration) * 1000);
+        }
+
+        // Tạo hoa định kỳ
+        setInterval(createFlower, 800);
+
+        // Xử lý nhạc nền
+        const music = document.getElementById('bg-music');
+        const musicBtn = document.getElementById('music-btn');
+        let isPlaying = false;
+
+        musicBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                music.pause();
+                musicBtn.innerText = '🔇';
+            } else {
+                music.play().catch(() => {
+                    // Trình duyệt có thể chặn autoplay
+                    console.log("Cần tương tác để phát nhạc");
+                });
+                musicBtn.innerText = '🎵';
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // Animation chuyển trang mượt mà
+        document.querySelectorAll(".card").forEach(link => {
+            link.addEventListener("click", function(e) {
+                e.preventDefault();
+                const href = this.getAttribute("href");
+                document.body.classList.add("fade-out");
+
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 500);
+            });
+        });
+    </script>
 </body>
 </html>
