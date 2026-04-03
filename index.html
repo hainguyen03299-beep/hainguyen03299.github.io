@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KHO GAME TIN HỌC</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+}
+
+/* HEADER */
+.header {
+    padding: 30px 15px 10px;
+    text-align: center;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 26px;
+}
+
+.header p {
+    margin-top: 8px;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+/* GRID RESPONSIVE */
+.grid {
+    display: grid;
+    gap: 15px;
+    padding: 15px;
+}
+
+/* MOBILE: 1 cột */
+.grid {
+    grid-template-columns: 1fr;
+}
+
+/* TABLET */
+@media (min-width: 600px) {
+    .grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* LAPTOP */
+@media (min-width: 1024px) {
+    .grid {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}
+
+/* CARD */
+.card {
+    background: white;
+    color: #333;
+    border-radius: 20px;
+    padding: 25px 15px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+/* Hover (PC) */
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Click (mobile giống app) */
+.card:active {
+    transform: scale(0.95);
+}
+
+/* ICON */
+.icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+/* FOOTER */
+.footer {
+    text-align: center;
+    font-size: 12px;
+    opacity: 0.8;
+    padding: 15px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <h1>🎮 Kho Game Tin Học</h1>
+    <p>Các em chọn khối để bắt đầu!</p>
+	<p>Chúc các em có những giờ ôn luyện thật vui vẻ!</p>
+</div>
+
+<div class="grid">
+
+    <a class="card" href="khoi6/index.html">
+        <div class="icon">📘</div>
+        Khối 6
+    </a>
+
+    <a class="card" href="khoi7/index.html">
+        <div class="icon">📗</div>
+        Khối 7
+    </a>
+
+    <a class="card" href="khoi8/index.html">
+        <div class="icon">📙</div>
+        Khối 8
+    </a>
+
+    <a class="card" href="khoi9/index.html">
+        <div class="icon">📕</div>
+        Khối 9
+    </a>
+
+</div>
+
+<div class="footer">
+    Thiết kế bởi Cô Nguyên - THCS Tam Giang
+</div>
+
+</body>
+</html>
